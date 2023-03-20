@@ -74,6 +74,14 @@ public class PlayerWeaponInstance extends PlayerItemInstance<WeaponState> implem
 
 	private int ammo;
 	private float recoil;
+	private long reloadingTimeout;
+	private float fireRate;
+	private long LoadIterationTimeout;
+	private long unloadingTimeout;
+	private float spawnEntityDamage;
+	private float spawnEntitySpeed;
+	private float spawnEntityGravityVelocity;
+	private float spawnEntityExplosionRadius;
 	private int seriesShotCount;
 	private long lastFireTimestamp;
 	private boolean aimed;
@@ -254,6 +262,14 @@ public class PlayerWeaponInstance extends PlayerItemInstance<WeaponState> implem
 		ammo = buf.readInt();
 		aimed = buf.readBoolean();
 		recoil = buf.readFloat();
+		reloadingTimeout = buf.readLong();
+		fireRate = buf.readFloat();
+		LoadIterationTimeout = buf.readLong();
+		unloadingTimeout = buf.readLong();
+		spawnEntityDamage = buf.readFloat();
+		spawnEntitySpeed = buf.readFloat();
+		spawnEntityGravityVelocity = buf.readFloat();
+		spawnEntityExplosionRadius = buf.readFloat();
 		maxShots = buf.readInt();
 		zoom = buf.readFloat();
 		activeTextureIndex = buf.readByte();
@@ -272,6 +288,14 @@ public class PlayerWeaponInstance extends PlayerItemInstance<WeaponState> implem
 		buf.writeInt(ammo);
 		buf.writeBoolean(aimed);
 		buf.writeFloat(recoil);
+		buf.writeLong(reloadingTimeout);
+		buf.writeFloat(fireRate);
+		buf.writeLong(LoadIterationTimeout);
+		buf.writeLong(unloadingTimeout);
+		buf.writeFloat(spawnEntityDamage);
+		buf.writeFloat(spawnEntitySpeed);
+		buf.writeFloat(spawnEntityGravityVelocity);
+		buf.writeFloat(spawnEntityExplosionRadius);
 		buf.writeInt(maxShots);
 		buf.writeFloat(zoom);
 		buf.writeByte(activeTextureIndex);
@@ -322,6 +346,14 @@ public class PlayerWeaponInstance extends PlayerItemInstance<WeaponState> implem
 		setAmmo(otherWeaponInstance.ammo);
 		setZoom(otherWeaponInstance.zoom);
 		setRecoil(otherWeaponInstance.recoil);
+		setReloadingTime(otherWeaponInstance.reloadingTimeout);
+		setFireRate(otherWeaponInstance.fireRate);
+		setLoadIterationTime((otherWeaponInstance.LoadIterationTimeout));
+		setUnloadingTimeout(otherWeaponInstance.unloadingTimeout);
+		setspawnEntityDamage(otherWeaponInstance.spawnEntityDamage);
+		setspawnEntitySpeed(otherWeaponInstance.spawnEntitySpeed);
+		setspawnEntityGravityVelocity(otherWeaponInstance.spawnEntityGravityVelocity);
+		setspawnEntityExplosionRadius(otherWeaponInstance.spawnEntityExplosionRadius);
 		setSelectedAttachmentIndexes(otherWeaponInstance.selectedAttachmentIndexes);
 		setActiveAttachmentIds(otherWeaponInstance.activeAttachmentIds);
 		setActiveTextureIndex(otherWeaponInstance.activeTextureIndex);
@@ -346,7 +378,65 @@ public class PlayerWeaponInstance extends PlayerItemInstance<WeaponState> implem
 			markDirty();
 		}
 	}
-	
+	public long getReloadingTime() {return reloadingTimeout;}
+
+	public void setReloadingTime(long reloadingTimeout) {
+		if(reloadingTimeout != this.reloadingTimeout) {
+			this.reloadingTimeout = reloadingTimeout;
+			markDirty();
+		}
+	}
+
+	public void setFireRate(float fireRate) {
+		if(fireRate != this.fireRate) {
+			this.fireRate = fireRate;
+			markDirty();
+		}
+	}
+	public long getLoadIterationTime() {
+		return loadIterationCount;
+	}
+	public void setLoadIterationTime(long LoadIterationTimeout) {
+		if(LoadIterationTimeout != this.LoadIterationTimeout) {
+			this.LoadIterationTimeout = LoadIterationTimeout;
+			markDirty();
+		}
+	}
+	public long getUnloadingTimeout() {return unloadingTimeout;}
+	public void setUnloadingTimeout(long UnloadingTimeout) {
+		if(UnloadingTimeout != this.unloadingTimeout) {
+			this.unloadingTimeout = UnloadingTimeout;
+			markDirty();
+		}
+	}
+	public float getSpawnEntityDamage() {return spawnEntityDamage;};
+	public void setspawnEntityDamage(float spawnEntityDamage) {
+		if(spawnEntityDamage != this.spawnEntityDamage) {
+			this.spawnEntityDamage = spawnEntityDamage;
+			markDirty();
+		}
+	}
+	public float getSpawnEntitySpeed() {return spawnEntitySpeed;}
+	public void setspawnEntitySpeed(float spawnEntitySpeed) {
+		if(spawnEntitySpeed != this.spawnEntitySpeed) {
+			this.spawnEntitySpeed = spawnEntitySpeed;
+			markDirty();
+		}
+	}
+	public float getSpawnEntityGravityVelocity() {return spawnEntityGravityVelocity;}
+	public void setspawnEntityGravityVelocity(float spawnEntityGravityVelocity) {
+		if(spawnEntityGravityVelocity != this.spawnEntityGravityVelocity) {
+			this.spawnEntityGravityVelocity = spawnEntityGravityVelocity;
+			markDirty();
+		}
+	}
+	public float getSpawnEntityExplosionRadius() {return spawnEntityExplosionRadius;}
+	public void setspawnEntityExplosionRadius(float spawnEntityExplosionRadius) {
+		if(spawnEntityExplosionRadius != this.spawnEntityExplosionRadius) {
+			this.spawnEntityExplosionRadius = spawnEntityExplosionRadius;
+			markDirty();
+		}
+	}
 	public boolean isDelayCompoundEnd() {
 		return isDelayCompoundEnd;
 	}

@@ -28,6 +28,14 @@ public class BalancePackManager {
 	private static final String HEADSHOT_MULTIPLIER_KEY = "headshotMultiplier";
 	private static final String DAMAGE_MULTIPLIER_KEY = "damageMultiplier";
 	private static final String RECOIL_MULTIPLIER_KEY = "recoilMultiplier";
+	private static final String RELOADING_TIME_MULTIPLIER_KEY = "reloadingTimeMultiplier";
+	private static final String FIRE_RATE_MULTIPLIER_KEY = "fireRateMultiplier";
+	private static final String LOAD_ITERATION_TIME_MULTIPLIER_KEY = "LoadIterationTimeMultiplier";
+	private static final String UN_LOAD_TIME_MULTIPLIER_KEY = "unLoadTimeMultiplier";
+	private static final String SPAWN_ENTITY_DAMAGE_KEY = "spawnEntityDamageMultiplier";
+	private static final String SPAWN_ENTITY_SPEED_KEY = "spawnEntitySpeedMultiplier";
+	private static final String SPAWN_ENTITY_GRAVITY_KEY = "spawnEntityGravityVelocityMultiplier";
+	private static final String SPAWN_ENTITY_EXPLOSION_KEY = "spawnEntityExplosionRadiusMultiplier";
 	private static final String GLOBAL_PARAMETERS_KEY = "globalParameters";
 	private static final String PACK_VERSION_KEY = "version";
 	private static final String PACK_NAME_KEY = "packName";
@@ -36,7 +44,7 @@ public class BalancePackManager {
 	private static final String GUN_CONFIG_LIST = "gunConfigurations";
 	private static final String CATEGORY_CONFIG_LIST = "categoryConfigurations";
 
-	private static final String FIRE_RATE_MODIFIER = "firerate";
+//	private static final String FIRE_RATE_MODIFIER = "firerate";
 
 	// firemodeAuto
 
@@ -56,12 +64,32 @@ public class BalancePackManager {
 		private GunConfigurationGroup group;
 		private double damageMultiplier = 1.0;
 		private double recoilMultiplier = 1.0;
+		private double reloadingTimeMultiplier = 1;
+		private float fireRateMultiplier = 1.0F;
+		private double LoadIterationTimeMultiplier = 1;
+		private double unLoadTimeMultiplier = 1;
+		private float spawnEntityDamageMultiplier = 1.0F;
+		private float spawnEntitySpeedMultiplier = 1.0F;
+		private float spawnEntityGravityVelocityMultiplier = 1.0F;
+		private float spawnEntityExplosionRadiusMultiplier = 1.0F;
 
 		public GunCategoryBalanceConfiguration(GunConfigurationGroup group, double damageMultiplier,
-				double recoilMultiplier) {
+				double recoilMultiplier,  double reloadingTimeMultiplier, float fireRateMultiplier, double loadIterationTimeMultiplier,
+											   double unLoadTimeMultiplier, float spawnEntityDamageMultiplier, float spawnEntitySpeedMultiplier,
+											   float spawnEntityGravityVelocityMultiplier, float spawnEntityExplosionRadiusMultiplier)
+		{
 			this.group = group;
 			this.damageMultiplier = damageMultiplier;
 			this.recoilMultiplier = recoilMultiplier;
+			this.fireRateMultiplier = fireRateMultiplier;
+			this.reloadingTimeMultiplier = reloadingTimeMultiplier;
+			this.LoadIterationTimeMultiplier = loadIterationTimeMultiplier;
+			this.unLoadTimeMultiplier = unLoadTimeMultiplier;
+			this.spawnEntitySpeedMultiplier = spawnEntitySpeedMultiplier;
+			this.spawnEntityDamageMultiplier = spawnEntityDamageMultiplier;
+			this.spawnEntityGravityVelocityMultiplier = spawnEntityGravityVelocityMultiplier;
+			this.spawnEntityExplosionRadiusMultiplier = spawnEntityExplosionRadiusMultiplier;
+
 		}
 
 		public GunConfigurationGroup getGroup() {
@@ -87,12 +115,29 @@ public class BalancePackManager {
 		public void setRecoilMultiplier(double recoilMultiplier) {
 			this.recoilMultiplier = recoilMultiplier;
 		}
+		public double getReloadingTimeMultiplier() {return reloadingTimeMultiplier;}
+		public float getfireRateMultiplier() {return fireRateMultiplier;}
+		public double getLoadIterationTimeMultiplier() {return LoadIterationTimeMultiplier;}
+
+		public double getunLoadTimeMultiplier() {return unLoadTimeMultiplier;}
+		public float getSpawnEntityDamageMultiplier() {return spawnEntityDamageMultiplier;}
+		public float getSpawnEntitySpeedMultiplier() {return spawnEntitySpeedMultiplier;}
+		public float getSpawnEntityGravityVelocityMultiplier() {return  spawnEntityGravityVelocityMultiplier;}
+		public float getSpawnEntityExplosionRadiusMultiplier() {return spawnEntityExplosionRadiusMultiplier;}
 
 		public JsonObject toJSONObject() {
 			JsonObject category = new JsonObject();
 			category.addProperty("group", getGroup().toString());
 			category.addProperty(DAMAGE_MULTIPLIER_KEY, getDamageMultiplier());
 			category.addProperty(RECOIL_MULTIPLIER_KEY, getRecoilMultiplier());
+			category.addProperty(RELOADING_TIME_MULTIPLIER_KEY, getReloadingTimeMultiplier());
+			category.addProperty(FIRE_RATE_MULTIPLIER_KEY, getfireRateMultiplier());
+			category.addProperty(LOAD_ITERATION_TIME_MULTIPLIER_KEY, getLoadIterationTimeMultiplier());
+			category.addProperty(UN_LOAD_TIME_MULTIPLIER_KEY, getunLoadTimeMultiplier());
+			category.addProperty(SPAWN_ENTITY_DAMAGE_KEY, getSpawnEntityDamageMultiplier());
+			category.addProperty(SPAWN_ENTITY_SPEED_KEY, getSpawnEntitySpeedMultiplier());
+			category.addProperty(SPAWN_ENTITY_EXPLOSION_KEY, getSpawnEntityExplosionRadiusMultiplier());
+			category.addProperty(SPAWN_ENTITY_GRAVITY_KEY, getSpawnEntityGravityVelocityMultiplier());
 
 			return category;
 		}
@@ -102,8 +147,17 @@ public class BalancePackManager {
 					.valueOf(obj.get("group").getAsString().toUpperCase());
 			double damage = obj.has(DAMAGE_MULTIPLIER_KEY) ? obj.get(DAMAGE_MULTIPLIER_KEY).getAsDouble() : 1.0;
 			double recoil = obj.has(RECOIL_MULTIPLIER_KEY) ? obj.get(RECOIL_MULTIPLIER_KEY).getAsDouble() : 1.0;
+			double reloadingTime = (int) (obj.has(RELOADING_TIME_MULTIPLIER_KEY) ? obj.get(RELOADING_TIME_MULTIPLIER_KEY).getAsDouble() : 1.0);
+			float fireRate = obj.has(FIRE_RATE_MULTIPLIER_KEY) ? obj.get(FIRE_RATE_MULTIPLIER_KEY).getAsFloat() : 1.0f;
+			double loadIterationTime = obj.has(LOAD_ITERATION_TIME_MULTIPLIER_KEY) ? obj.get(LOAD_ITERATION_TIME_MULTIPLIER_KEY).getAsInt() : (int) 1.0;
+			double unLoadTime = obj.has(UN_LOAD_TIME_MULTIPLIER_KEY) ? obj.get(UN_LOAD_TIME_MULTIPLIER_KEY).getAsLong() : 1;
+			float SpawnEntityDamage = obj.has(SPAWN_ENTITY_DAMAGE_KEY) ? obj.get(SPAWN_ENTITY_DAMAGE_KEY).getAsFloat() : 1.0f;
+			float SpawnEntitySpeed = obj.has(SPAWN_ENTITY_SPEED_KEY) ? obj.get(SPAWN_ENTITY_SPEED_KEY).getAsFloat() : 1.0f;
+			float SpawnEntityExplosionRadius = obj.has(SPAWN_ENTITY_EXPLOSION_KEY) ? obj.get(SPAWN_ENTITY_EXPLOSION_KEY).getAsFloat() : 1.0f;
+			float SpawnEntityGravityVelocity = obj.has(SPAWN_ENTITY_GRAVITY_KEY) ? obj.get(SPAWN_ENTITY_GRAVITY_KEY).getAsFloat() : 1.0f;
 
-			return new GunCategoryBalanceConfiguration(configurationGroup, damage, recoil);
+			return new GunCategoryBalanceConfiguration(configurationGroup, damage, recoil,  reloadingTime, fireRate, loadIterationTime, unLoadTime, SpawnEntityDamage, SpawnEntitySpeed, SpawnEntityExplosionRadius, SpawnEntityGravityVelocity);
+
 		}
 
 	}
@@ -117,8 +171,15 @@ public class BalancePackManager {
 
 		// Recoil as -1 means the recoil is not modified
 		private double recoil = -1;
+		private long reloadingTimeout = -1;
 
 		private float fireRate = -1;
+		private long loadIterationTimeout = -1;
+		private long unloadTimeout = -1;
+		private float SpawnEntityDamage = -1;
+		private float SpawnEntitySpeed = -1;
+		private float SpawnEntityExplosionRadius = -1;
+		private float SpawnEntityGravityVelocity = -1;
 
 		private boolean fireModePropertiesChanged = false;
 
@@ -131,11 +192,20 @@ public class BalancePackManager {
 		private boolean fireModeAutoChanged = false;
 		private boolean autoFireEnabled = false;
 
-		public GunBalanceConfiguration(String weaponName, boolean enabled, double damage, double recoil) {
+		public GunBalanceConfiguration(String weaponName, boolean enabled, double damage, double recoil, long reloadingTimeout, float fireRate, long loadIterationTimeout, long unloadTimeout, float spawnEntityDamage, float spawnEntitySpeed, float spawnEntityGravityVelocity, float spawnEntityExplosionRadius) {
 			this.weaponName = weaponName;
 			this.enabled = enabled;
 			this.damage = damage;
 			this.recoil = recoil;
+			this.reloadingTimeout = reloadingTimeout;
+			this.fireRate = fireRate;
+			this.loadIterationTimeout = loadIterationTimeout;
+			this.unloadTimeout = unloadTimeout;
+			this.SpawnEntityDamage = spawnEntityDamage;
+			this.SpawnEntitySpeed = spawnEntitySpeed;
+			this.SpawnEntityExplosionRadius = spawnEntityExplosionRadius;
+			this.SpawnEntityGravityVelocity = spawnEntityGravityVelocity;
+
 		}
 
 		public String getWeaponName() {
@@ -212,6 +282,11 @@ public class BalancePackManager {
 		public double getRecoil() {
 			return recoil;
 		}
+		public long getReloadingTime() {return reloadingTimeout;}
+		public void setReloadingTime(long reloadingTime) {
+			this.reloadingTimeout = reloadingTime;
+		}
+
 
 		public void setRecoil(double recoil) {
 			this.recoil = recoil;
@@ -221,9 +296,28 @@ public class BalancePackManager {
 			this.fireRate = firerate;
 		}
 
-		public double getFirerate() {
+		public float getFirerate() {
 			return this.fireRate;
 		}
+		public void setLoadIterationTime(long loadIterationTime) {
+			this.loadIterationTimeout = loadIterationTime;
+		}
+
+		public long getLoadIterationTime() {
+			return this.loadIterationTimeout;
+		}
+		public void setUnloadTime(long unloadTime) {
+			this.unloadTimeout = unloadTime;
+		}
+
+		public double getUnloadTime() {
+			return this.unloadTimeout;
+		}
+		public float getSpawnEntityDamage() {return  this.SpawnEntityDamage;}
+		public float getSpawnEntitySpeed() {return this.SpawnEntitySpeed;}
+		public float getSpawnEntityExplosionRadius() {return this.SpawnEntityExplosionRadius;}
+		public float getSpawnEntityGravityVelocity() {return this.SpawnEntityGravityVelocity;}
+
 
 		public JsonObject toJSONObject() {
 			JsonObject weapon = new JsonObject();
@@ -231,9 +325,18 @@ public class BalancePackManager {
 			weapon.addProperty("enabled", isEnabled());
 			weapon.addProperty("damage", getDamage());
 			weapon.addProperty("recoil", getRecoil());
+			weapon.addProperty("reloadingTimeout", getReloadingTime());
+			weapon.addProperty("fireRate", getFirerate());
+			weapon.addProperty("loadIterationTimeout", getLoadIterationTime());
+			weapon.addProperty("unloadingTimeout", getUnloadTime());
+			weapon.addProperty("SpawnEntityDamage", getSpawnEntityDamage());
+			weapon.addProperty("SpawnEntitySpeed", getSpawnEntitySpeed());
+			weapon.addProperty("SpawnEntityExplosionRadius", getSpawnEntityExplosionRadius());
+			weapon.addProperty("SpawnEntityGravityVelocity", getSpawnEntityGravityVelocity());
 
-			if (getFirerate() != -1)
-				weapon.addProperty(FIRE_RATE_MODIFIER, getFirerate());
+
+//			if (getFirerate() != -1)
+//				weapon.addProperty(FIRE_RATE_MODIFIER, getFirerate());
 
 			if (wereFiremodePropertiesAltered()) {
 				weapon.addProperty(FIRE_MODE_AUTO, getFiremodeAuto());
@@ -250,14 +353,23 @@ public class BalancePackManager {
 			boolean enabled = obj.has("enabled") ? obj.get("enabled").getAsBoolean() : true;
 			double damage = obj.has("damage") ? obj.get("damage").getAsDouble() : -1;
 			double recoil = obj.has("recoil") ? obj.get("recoil").getAsDouble() : -1;
+			double reloadingTimeout = obj.has("reloadingTimeout") ?  obj.get("reloadingTimeout").getAsLong() : -1;
+			float fireRate = obj.has("fireRate") ? obj.get("fireRate").getAsFloat() : -1;
+			double loadIterationTimeout = obj.has("loadIterationTimeout") ? obj.get("loadIterationTimeout").getAsLong() : -1;
+			double unloadingTimeout = obj.has("unloadingTimeout") ? obj.get("unloadingTimeout").getAsLong() : -1;
+			float SpawnEntityDamage = obj.has("SpawnEntityDamage") ? obj.get(("SpawnEntityDamage")).getAsFloat() : -1;
+			float SpawnEntitySpeed = obj.has("SpawnEntitySpeed") ? obj.get("SpawnEntitySpeed").getAsFloat() : -1;
+			float SpawnEntityExplosionRadius = obj.has("SpawnEntityExplosionRadius") ? obj.get("SpawnEntityExplosionRadius").getAsFloat() : -1;
+			float SpawnEntityGravityVelocity = obj.has("SpawnEntityGravityVelocity") ? obj.get("SpawnEntityGravityVelocity").getAsFloat() : -1;
 
-			GunBalanceConfiguration gbc = new GunBalanceConfiguration(name, enabled, damage, recoil);
+			GunBalanceConfiguration gbc = new GunBalanceConfiguration(name, enabled, damage, recoil, (long) reloadingTimeout, fireRate, (long) loadIterationTimeout, (long) unloadingTimeout, SpawnEntityDamage, SpawnEntitySpeed,SpawnEntityExplosionRadius, SpawnEntityGravityVelocity);
 
-			if (obj.has(FIRE_RATE_MODIFIER)) {
-				// System.out.println("For " + name + " firerate will be " +
-				// obj.get(FIRE_RATE_MODIFIER).getAsFloat());
-				gbc.setFirerate(obj.get(FIRE_RATE_MODIFIER).getAsFloat());
-			}
+
+//			if (obj.has(FIRE_RATE_MODIFIER)) {
+//				// System.out.println("For " + name + " firerate will be " +
+//				// obj.get(FIRE_RATE_MODIFIER).getAsFloat());
+//				gbc.setFirerate(obj.get(FIRE_RATE_MODIFIER).getAsFloat());
+//			}
 
 			if (obj.has(FIRE_MODE_AUTO) && obj.has(FIRE_MODE_BURST) && obj.has(FIRE_MODE_SINGLE)) {
 				gbc.setFiremodeAuto(obj.get(FIRE_MODE_AUTO).getAsBoolean());
@@ -729,9 +841,9 @@ public class BalancePackManager {
 
 	public static void createDefaultBalancePack() {
 		BalancePack defaultPack = new BalancePack("default", "1.0", 2.5, 1.0, 1.0);
-		defaultPack.addWeaponConfig(new GunBalanceConfiguration("exampleWeapon", true, 8.0, 1.0));
+		defaultPack.addWeaponConfig(new GunBalanceConfiguration("exampleWeapon", true, 8.0, 1.0, 1, 1.0f, 1, 1, 1.0f, 1.0f, 1.0f, 1.0f));
 		for (GunConfigurationGroup i : GunConfigurationGroup.values()) {
-			defaultPack.addBalancingCategory(new GunCategoryBalanceConfiguration(i, 1.0, 1.0));
+			defaultPack.addBalancingCategory(new GunCategoryBalanceConfiguration(i, 1.0, 1.0, 1, 1.0f, 1, 1, 1.0f, 1.0f, 1.0f, 1.0f));
 		}
 		writeJSONToFile(defaultPack.toJSONObject(), new File("balancepacks/default_pack.json"));
 	}
@@ -822,11 +934,98 @@ public class BalancePackManager {
 			return false;
 		return true;
 	}
-
+	public static boolean shouldChangeWeaponReloadingTime(Weapon weapon) {
+		if (!hasActiveBalancePack() || !balancePackAddressesWeapon(weapon)
+				|| getActiveBalancePack().getWeaponBalancing(weapon.getName()).getReloadingTime() == -1)
+			return false;
+		return true;
+	}
+	public static boolean shouldChangeWeaponfireRate(Weapon weapon) {
+		if (!hasActiveBalancePack() || !balancePackAddressesWeapon(weapon)
+				|| getActiveBalancePack().getWeaponBalancing(weapon.getName()).getFirerate() == -1)
+			return false;
+		return true;
+	}
+	public static boolean shouldChangeWeaponLoadIterationTime(Weapon weapon) {
+		if (!hasActiveBalancePack() || !balancePackAddressesWeapon(weapon)
+				|| getActiveBalancePack().getWeaponBalancing(weapon.getName()).getLoadIterationTime() == -1)
+			return false;
+		return true;
+	}
+	public static boolean shouldChangeWeaponUnloadTime(Weapon weapon) {
+		if (!hasActiveBalancePack() || !balancePackAddressesWeapon(weapon)
+				|| getActiveBalancePack().getWeaponBalancing(weapon.getName()).getUnloadTime() == -1)
+			return false;
+		return true;
+	}
+	public static boolean shouldChangeWeaponSpawnEntityDamage(Weapon weapon) {
+		if (!hasActiveBalancePack() || !balancePackAddressesWeapon(weapon)
+				|| getActiveBalancePack().getWeaponBalancing(weapon.getName()).getSpawnEntityDamage() == -1)
+			return false;
+		return true;
+	}
+	public static boolean shouldChangeWeaponSpawnEntitySpeed(Weapon weapon) {
+		if (!hasActiveBalancePack() || !balancePackAddressesWeapon(weapon)
+				|| getActiveBalancePack().getWeaponBalancing(weapon.getName()).getSpawnEntitySpeed() == -1)
+			return false;
+		return true;
+	}
+	public static boolean shouldChangeWeaponSpawnEntityGravityVelocity(Weapon weapon) {
+		if (!hasActiveBalancePack() || !balancePackAddressesWeapon(weapon)
+				|| getActiveBalancePack().getWeaponBalancing(weapon.getName()).getSpawnEntityGravityVelocity() == -1)
+			return false;
+		return true;
+	}
+	public static boolean shouldChangeWeaponSpawnEntityExplosionRadius(Weapon weapon) {
+		if (!hasActiveBalancePack() || !balancePackAddressesWeapon(weapon)
+				|| getActiveBalancePack().getWeaponBalancing(weapon.getName()).getSpawnEntityExplosionRadius() == -1)
+			return false;
+		return true;
+	}
 	public static double getNewWeaponRecoil(Weapon weapon) {
 		if (!hasActiveBalancePack() || !balancePackAddressesWeapon(weapon))
 			return -1;
 		return getActiveBalancePack().getWeaponBalancing(weapon.getName()).getRecoil();
+	}
+	public static double getNewWeaponReloadingTime(Weapon weapon) {
+		if (!hasActiveBalancePack() || !balancePackAddressesWeapon(weapon))
+			return -1;
+		return getActiveBalancePack().getWeaponBalancing(weapon.getName()).getReloadingTime();
+	}
+	public static float getNewWeaponFireRate(Weapon weapon) {
+		if (!hasActiveBalancePack() || !balancePackAddressesWeapon(weapon))
+			return -1;
+		return getActiveBalancePack().getWeaponBalancing(weapon.getName()).getFirerate();
+	}
+	public static double getNewWeaponLoadIterationTime(Weapon weapon) {
+		if (!hasActiveBalancePack() || !balancePackAddressesWeapon(weapon))
+			return -1;
+		return getActiveBalancePack().getWeaponBalancing(weapon.getName()).getLoadIterationTime();
+	}
+	public static double getNewWeaponUnloadTime(Weapon weapon) {
+		if (!hasActiveBalancePack() || !balancePackAddressesWeapon(weapon))
+			return -1;
+		return getActiveBalancePack().getWeaponBalancing(weapon.getName()).getUnloadTime();
+	}
+	public static float getNewWeaponSpawnEntityDamage(Weapon weapon) {
+		if (!hasActiveBalancePack() || !balancePackAddressesWeapon(weapon))
+			return -1;
+		return getActiveBalancePack().getWeaponBalancing(weapon.getName()).getSpawnEntityDamage();
+	}
+	public static float getNewWeaponSpawnEntitySpeed(Weapon weapon) {
+		if (!hasActiveBalancePack() || !balancePackAddressesWeapon(weapon))
+			return -1;
+		return getActiveBalancePack().getWeaponBalancing(weapon.getName()).getSpawnEntitySpeed();
+	}
+	public static float getNewWeaponSpawnEntityGravityVelocity(Weapon weapon) {
+		if (!hasActiveBalancePack() || !balancePackAddressesWeapon(weapon))
+			return -1;
+		return getActiveBalancePack().getWeaponBalancing(weapon.getName()).getSpawnEntityGravityVelocity();
+	}
+	public static float getNewWeaponSpawnEntityExplosionRadius(Weapon weapon) {
+		if (!hasActiveBalancePack() || !balancePackAddressesWeapon(weapon))
+			return -1;
+		return getActiveBalancePack().getWeaponBalancing(weapon.getName()).getSpawnEntityExplosionRadius();
 	}
 
 	public static double getGroupDamageMultiplier(GunConfigurationGroup group) {
@@ -839,6 +1038,46 @@ public class BalancePackManager {
 		if (!hasActiveBalancePack() || !balancePackAddressesGroup(group))
 			return 1.0;
 		return getActiveBalancePack().getCategoryBalancing(group).getRecoilMultiplier();
+	}
+	public static double getGroupReloadingTimeMultiplier(GunConfigurationGroup group) {
+		if (!hasActiveBalancePack() || !balancePackAddressesGroup(group))
+			return 1;
+		return getActiveBalancePack().getCategoryBalancing(group).getReloadingTimeMultiplier();
+	}
+	public static float getGroupfireRateMultiplier(GunConfigurationGroup group) {
+		if (!hasActiveBalancePack() || !balancePackAddressesGroup(group))
+			return 1;
+		return getActiveBalancePack().getCategoryBalancing(group).getfireRateMultiplier();
+	}
+	public static double getGroupLoadIterationTimeMultiplier(GunConfigurationGroup group) {
+		if (!hasActiveBalancePack() || !balancePackAddressesGroup(group))
+			return 1;
+		return getActiveBalancePack().getCategoryBalancing(group).getLoadIterationTimeMultiplier();
+	}
+	public static double getGroupUnLoadTimeMultiplier(GunConfigurationGroup group) {
+		if (!hasActiveBalancePack() || !balancePackAddressesGroup(group))
+			return 1;
+		return getActiveBalancePack().getCategoryBalancing(group).getunLoadTimeMultiplier();
+	}
+	public static float getGroupSpawnEntityDamageMultiplier(GunConfigurationGroup group) {
+		if (!hasActiveBalancePack() || !balancePackAddressesGroup(group))
+			return 1;
+		return getActiveBalancePack().getCategoryBalancing(group).getSpawnEntityDamageMultiplier();
+	}
+	public static float getGroupSpawnEntitySpeedMultiplier(GunConfigurationGroup group) {
+		if (!hasActiveBalancePack() || !balancePackAddressesGroup(group))
+			return 1;
+		return getActiveBalancePack().getCategoryBalancing(group).getSpawnEntitySpeedMultiplier();
+	}
+	public static float getGroupSpawnEntityExplosionRadiusMultiplier(GunConfigurationGroup group) {
+		if (!hasActiveBalancePack() || !balancePackAddressesGroup(group))
+			return 1;
+		return getActiveBalancePack().getCategoryBalancing(group).getSpawnEntityExplosionRadiusMultiplier();
+	}
+	public static float getGroupSpawnEntityGravityVelocityMultiplier(GunConfigurationGroup group) {
+		if (!hasActiveBalancePack() || !balancePackAddressesGroup(group))
+			return 1;
+		return getActiveBalancePack().getCategoryBalancing(group).getSpawnEntityGravityVelocityMultiplier();
 	}
 
 	public static double getGlobalDamageMultiplier() {

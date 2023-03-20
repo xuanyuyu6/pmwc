@@ -38,7 +38,7 @@ public class EntityFlashGrenade extends AbstractEntityGrenade {
 
         private long explosionTimeout;
         private float explosionStrength;
-        private boolean isDestroyingBlocks = true;
+        private boolean isDestroyingBlocks = false;
         private long activationTimestamp;
         private EntityLivingBase thrower;
         private ItemGrenade itemGrenade;

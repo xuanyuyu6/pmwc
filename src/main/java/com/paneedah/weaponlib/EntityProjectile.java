@@ -241,8 +241,8 @@ public abstract class EntityProjectile extends Entity implements IProjectile, Co
 
              IBlockState state = compatibility.world(this).getBlockState(rtr.getBlockPos());
              if(state.getMaterial() == Material.GLASS) {
-                 this.world.destroyBlock(rtr.getBlockPos(), true);
 
+                     this.world.destroyBlock(rtr.getBlockPos(), true);
                  ModContext context = CommonModContext.getContext();
                  if (context == null)
                      return;

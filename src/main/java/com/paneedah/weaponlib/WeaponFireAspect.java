@@ -325,7 +325,52 @@ public class WeaponFireAspect implements Aspect<WeaponState, PlayerWeaponInstanc
         player.rotationYaw = player.rotationYaw + recoilAmount * rotationYawFactor * 0.4f;
 		
         ClientValueRepo.recoilWoundY += recoilAmount * 0.7f;
-        
+
+        long reloadingTimeAmount = weaponInstance.getReloadingTime();
+        if(BalancePackManager.shouldChangeWeaponReloadingTime(weapon)) reloadingTimeAmount = (long) BalancePackManager.getNewWeaponReloadingTime(weapon);
+//        reloadingTimeAmount *= BalancePackManager.getGlobalReloadingTimeMultiplier();
+        reloadingTimeAmount *= BalancePackManager.getGroupReloadingTimeMultiplier(weapon.getConfigurationGroup());
+        weapon.builder.reloadingTimeout = reloadingTimeAmount;
+
+        float fireRateAmount = weaponInstance.getFireRate();
+        if(BalancePackManager.shouldChangeWeaponfireRate(weapon)) fireRateAmount = BalancePackManager.getNewWeaponFireRate(weapon);
+//        fireRateAmount *= BalancePackManager.getGlobalfireRateMultiplier();
+        fireRateAmount *= BalancePackManager.getGroupfireRateMultiplier(weapon.getConfigurationGroup());
+        weapon.builder.fireRate = fireRateAmount;
+
+        long LoadIterationTimeAmount = weaponInstance.getLoadIterationTime();
+        if(BalancePackManager.shouldChangeWeaponLoadIterationTime(weapon)) LoadIterationTimeAmount = (long) BalancePackManager.getNewWeaponLoadIterationTime(weapon);
+//        LoadIterationTimeAmount *= BalancePackManager.getGloballoadIterationTimeMultiplier();
+        LoadIterationTimeAmount *= BalancePackManager.getGroupLoadIterationTimeMultiplier(weapon.getConfigurationGroup());
+        weapon.builder.loadIterationTimeout = LoadIterationTimeAmount;
+
+        long UnloadTimeAmount = weaponInstance.getUnloadingTimeout();
+        if(BalancePackManager.shouldChangeWeaponUnloadTime(weapon)) UnloadTimeAmount = (long) BalancePackManager.getNewWeaponUnloadTime(weapon);
+//        UnloadTimeAmount *= BalancePackManager.getGlobalunloadTimeMultiplier();
+        UnloadTimeAmount *= BalancePackManager.getGroupUnLoadTimeMultiplier(weapon.getConfigurationGroup());
+        weapon.builder.unloadingTimeout = UnloadTimeAmount;
+
+        float spawnEntityDamageAmount = weaponInstance.getSpawnEntityDamage();
+        if (BalancePackManager.shouldChangeWeaponSpawnEntityDamage(weapon)) spawnEntityDamageAmount = BalancePackManager.getNewWeaponSpawnEntityDamage(weapon);
+        spawnEntityDamageAmount *= BalancePackManager.getGroupSpawnEntityDamageMultiplier(weapon.getConfigurationGroup());
+        weapon.builder.spawnEntityDamage = spawnEntityDamageAmount;
+
+        float spawnEntitySpeedAmount = weaponInstance.getSpawnEntitySpeed();
+        if (BalancePackManager.shouldChangeWeaponSpawnEntitySpeed(weapon)) spawnEntitySpeedAmount = BalancePackManager.getNewWeaponSpawnEntitySpeed(weapon);
+        spawnEntitySpeedAmount *= BalancePackManager.getGroupSpawnEntitySpeedMultiplier(weapon.getConfigurationGroup());
+        weapon.builder.spawnEntitySpeed = spawnEntitySpeedAmount;
+
+        float spawnEntityExplosionRadiusAmount = weaponInstance.getSpawnEntityExplosionRadius();
+        if (BalancePackManager.shouldChangeWeaponSpawnEntityExplosionRadius(weapon)) spawnEntityExplosionRadiusAmount = BalancePackManager.getNewWeaponSpawnEntityExplosionRadius(weapon);
+        spawnEntityExplosionRadiusAmount *= BalancePackManager.getGroupSpawnEntityExplosionRadiusMultiplier(weapon.getConfigurationGroup());
+        weapon.builder.spawnEntityDamage = spawnEntityExplosionRadiusAmount;
+
+        float spawnEntityGravityVelocityAmount = weaponInstance.getSpawnEntityGravityVelocity();
+        if (BalancePackManager.shouldChangeWeaponSpawnEntityGravityVelocity(weapon)) spawnEntityGravityVelocityAmount = BalancePackManager.getNewWeaponSpawnEntityGravityVelocity(weapon);
+        spawnEntityGravityVelocityAmount *= BalancePackManager.getGroupSpawnEntityGravityVelocityMultiplier(weapon.getConfigurationGroup());
+        weapon.builder.spawnEntityGravityVelocity = spawnEntityGravityVelocityAmount;
+
+
 
         if(ModernConfigManager.enableMuzzleEffects && weapon.builder.flashIntensity > 0) {
             modContext.getEffectManager().spawnFlashParticle(player, weapon.builder.flashIntensity, weapon.builder.flashScale.get(),

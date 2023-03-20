@@ -17034,6 +17034,15 @@ public class Attachments {
                 .withCreativeTab(ModernWarfareMod.AttachmentsTab).withModel(new com.paneedah.mwc.models.M1928Grip(), "m1a1thompson.png")
                 .withApply((a, i) -> {
                     i.setRecoil(i.getWeapon().getRecoil() * 0.6f);
+                    i.setReloadingTime(i.getWeapon().getReloadingTime() * 1);
+                    i.setFireRate(i.getWeapon().getFireRate());
+                    i.setLoadIterationTime(i.getWeapon().getLoadIterationTimeout());
+                    i.setUnloadingTimeout(i.getWeapon().getUnloadingTimeout());
+                    i.setspawnEntityDamage(i.getWeapon().getSpawnEntityDamage());
+                    i.setspawnEntitySpeed(i.getWeapon().getSpawnEntitySpeed());
+                    i.setspawnEntityGravityVelocity(i.getWeapon().getSpawnEntityGravityVelocity());
+                    i.setspawnEntityExplosionRadius(i.getWeapon().getSpawnEntityExplosionRadius());
+
                 }).withFirstPersonModelPositioning((model, itemStack) -> {
                     if (model instanceof com.paneedah.mwc.models.M1928Grip) {
                         GL11.glTranslatef(0.7F, -1.2F, 0.5F);
@@ -17072,6 +17081,15 @@ public class Attachments {
                 .withCreativeTab(ModernWarfareMod.AttachmentsTab).withModel(new com.paneedah.mwc.models.M1A1Grip(), "m1a1thompson.png")
                 .withApply((a, i) -> {
                     i.setRecoil(i.getWeapon().getRecoil() * 1.0f);
+                    i.setReloadingTime(i.getWeapon().getReloadingTime() * 1);
+                    i.setFireRate(i.getWeapon().getFireRate());
+                    i.setLoadIterationTime(i.getWeapon().getLoadIterationTimeout());
+                    i.setUnloadingTimeout(i.getWeapon().getUnloadingTimeout());
+                    i.setspawnEntityDamage(i.getWeapon().getSpawnEntityDamage());
+                    i.setspawnEntitySpeed(i.getWeapon().getSpawnEntitySpeed());
+                    i.setspawnEntityGravityVelocity(i.getWeapon().getSpawnEntityGravityVelocity());
+                    i.setspawnEntityExplosionRadius(i.getWeapon().getSpawnEntityExplosionRadius());
+
                 }).withFirstPersonModelPositioning((model, itemStack) -> {
                     if (model instanceof com.paneedah.mwc.models.M1A1Grip) {
                         GL11.glTranslatef(0.7F, -1.2F, 0.5F);
@@ -17131,6 +17149,15 @@ public class Attachments {
                     	new CraftingEntry(MWCItems.gunmetalIngot, 2))
                 .withApply((a, i) -> {
                     i.setRecoil(i.getWeapon().getRecoil() * 0.6f);
+                    i.setReloadingTime(i.getWeapon().getReloadingTime() * 1);
+                    i.setFireRate(i.getWeapon().getFireRate());
+                    i.setLoadIterationTime(i.getWeapon().getLoadIterationTimeout());
+                    i.setUnloadingTimeout(i.getWeapon().getUnloadingTimeout());
+                    i.setspawnEntityDamage(i.getWeapon().getSpawnEntityDamage());
+                    i.setspawnEntitySpeed(i.getWeapon().getSpawnEntitySpeed());
+                    i.setspawnEntityGravityVelocity(i.getWeapon().getSpawnEntityGravityVelocity());
+                    i.setspawnEntityExplosionRadius(i.getWeapon().getSpawnEntityExplosionRadius());
+
                 }).withFirstPersonModelPositioning((model, itemStack) -> {
                     if (model instanceof com.paneedah.mwc.models.Grip2) {
                         GL11.glTranslatef(0.7F, -1.2F, 0.5F);
@@ -17180,6 +17207,15 @@ public class Attachments {
                     	new CraftingEntry(MWCItems.gunmetalIngot, 3))
                 .withApply((a, i) -> {
                     i.setRecoil(i.getWeapon().getRecoil() * 0.6f);
+                    i.setReloadingTime(i.getWeapon().getReloadingTime() * 1);
+                    i.setFireRate(i.getWeapon().getFireRate());
+                    i.setLoadIterationTime(i.getWeapon().getLoadIterationTimeout());
+                    i.setUnloadingTimeout(i.getWeapon().getUnloadingTimeout());
+                    i.setspawnEntityDamage(i.getWeapon().getSpawnEntityDamage());
+                    i.setspawnEntitySpeed(i.getWeapon().getSpawnEntitySpeed());
+                    i.setspawnEntityGravityVelocity(i.getWeapon().getSpawnEntityGravityVelocity());
+                    i.setspawnEntityExplosionRadius(i.getWeapon().getSpawnEntityExplosionRadius());
+
                 }).withFirstPersonModelPositioning((model, itemStack) -> {
                     if (model instanceof com.paneedah.mwc.models.JunoGrip) {
                         GL11.glTranslatef(0.7F, -1.2F, 0.5F);
@@ -17221,6 +17257,15 @@ public class Attachments {
                     	new CraftingEntry(MWCItems.gunmetalIngot, 3))
                 .withApply((a, i) -> {
                     i.setRecoil(i.getWeapon().getRecoil() * 0.4f);
+                    i.setReloadingTime(i.getWeapon().getReloadingTime() * 1);
+                    i.setFireRate(i.getWeapon().getFireRate());
+                    i.setLoadIterationTime(i.getWeapon().getLoadIterationTimeout());
+                    i.setUnloadingTimeout(i.getWeapon().getUnloadingTimeout());
+
+                    i.setspawnEntityDamage(i.getWeapon().getSpawnEntityDamage());
+                    i.setspawnEntitySpeed(i.getWeapon().getSpawnEntitySpeed());
+                    i.setspawnEntityGravityVelocity(i.getWeapon().getSpawnEntityGravityVelocity());
+                    i.setspawnEntityExplosionRadius(i.getWeapon().getSpawnEntityExplosionRadius());
                 }).withFirstPersonModelPositioning((model, itemStack) -> {
                     if (model instanceof com.paneedah.mwc.models.Glock18Cstock) {
                         GL11.glTranslatef(0.7F, -1.2F, 0.5F);
@@ -17263,6 +17308,15 @@ public class Attachments {
                     	new CraftingEntry(MWCItems.gunmetalIngot, 3))
                 .withApply((a, i) -> {
                     i.setRecoil(i.getWeapon().getRecoil() * 0.6f);
+                    i.setReloadingTime(i.getWeapon().getReloadingTime());
+                    i.setFireRate(i.getWeapon().getFireRate());
+                    i.setLoadIterationTime(i.getWeapon().getLoadIterationTimeout());
+                    i.setUnloadingTimeout(i.getWeapon().getUnloadingTimeout());
+                    i.setspawnEntityDamage(i.getWeapon().getSpawnEntityDamage());
+                    i.setspawnEntitySpeed(i.getWeapon().getSpawnEntitySpeed());
+                    i.setspawnEntityGravityVelocity(i.getWeapon().getSpawnEntityGravityVelocity());
+                    i.setspawnEntityExplosionRadius(i.getWeapon().getSpawnEntityExplosionRadius());
+
                 }).withFirstPersonModelPositioning((model, itemStack) -> {
                     if (model instanceof com.paneedah.mwc.models.VP70stock) {
                         GL11.glTranslatef(0.7F, -1.2F, 0.5F);
@@ -17319,6 +17373,15 @@ public class Attachments {
                     	new CraftingEntry(MWCItems.gunmetalIngot, 2))
                 .withApply((a, i) -> {
                     i.setRecoil(i.getWeapon().getRecoil() * 0.6f);
+                    i.setReloadingTime(i.getWeapon().getReloadingTime() * 1);
+                    i.setFireRate(i.getWeapon().getFireRate());
+                    i.setLoadIterationTime(i.getWeapon().getLoadIterationTimeout());
+                    i.setUnloadingTimeout(i.getWeapon().getUnloadingTimeout());
+
+                    i.setspawnEntityDamage(i.getWeapon().getSpawnEntityDamage());
+                    i.setspawnEntitySpeed(i.getWeapon().getSpawnEntitySpeed());
+                    i.setspawnEntityGravityVelocity(i.getWeapon().getSpawnEntityGravityVelocity());
+                    i.setspawnEntityExplosionRadius(i.getWeapon().getSpawnEntityExplosionRadius());
                 })
                 .withFirstPersonModelPositioning((model, itemStack) -> {
                     if (model instanceof com.paneedah.mwc.models.AngledGrip) {
@@ -17381,6 +17444,14 @@ public class Attachments {
                     	new CraftingEntry(MWCItems.gunmetalIngot, 2))
                 .withApply((a, i) -> {
                     i.setRecoil(i.getWeapon().getRecoil() * 0.6f);
+                    i.setReloadingTime(i.getWeapon().getReloadingTime() * 1);
+                    i.setFireRate(i.getWeapon().getFireRate());
+                    i.setLoadIterationTime(i.getWeapon().getLoadIterationTimeout());
+                    i.setUnloadingTimeout(i.getWeapon().getUnloadingTimeout());
+                    i.setspawnEntityDamage(i.getWeapon().getSpawnEntityDamage());
+                    i.setspawnEntitySpeed(i.getWeapon().getSpawnEntitySpeed());
+                    i.setspawnEntityGravityVelocity(i.getWeapon().getSpawnEntityGravityVelocity());
+                    i.setspawnEntityExplosionRadius(i.getWeapon().getSpawnEntityExplosionRadius());
                 })
                 // .withApply((a, weapon, player) ->
                 // weapon.changeRecoil(player, 1.3F);
@@ -17447,6 +17518,14 @@ public class Attachments {
                     	new CraftingEntry(MWCItems.gunmetalIngot, 2))
                 .withApply((a, i) -> {
                     i.setRecoil(i.getWeapon().getRecoil() * 0.6f);
+                    i.setReloadingTime(i.getWeapon().getReloadingTime() * 1);
+                    i.setFireRate(i.getWeapon().getFireRate());
+                    i.setLoadIterationTime(i.getWeapon().getLoadIterationTimeout());
+                    i.setUnloadingTimeout(i.getWeapon().getUnloadingTimeout());
+                    i.setspawnEntityDamage(i.getWeapon().getSpawnEntityDamage());
+                    i.setspawnEntitySpeed(i.getWeapon().getSpawnEntitySpeed());
+                    i.setspawnEntityGravityVelocity(i.getWeapon().getSpawnEntityGravityVelocity());
+                    i.setspawnEntityExplosionRadius(i.getWeapon().getSpawnEntityExplosionRadius());
                 })
                 .withFirstPersonModelPositioning((model, itemStack) -> {
                     if (model instanceof com.paneedah.mwc.models.VGrip) {
@@ -17503,6 +17582,14 @@ public class Attachments {
                     	new CraftingEntry(MWCItems.gunmetalIngot, 2))
                 .withApply((a, i) -> {
                     i.setRecoil(i.getWeapon().getRecoil() * 0.4f);
+                    i.setReloadingTime(i.getWeapon().getReloadingTime() * 1);
+                    i.setFireRate(i.getWeapon().getFireRate());
+                    i.setLoadIterationTime(i.getWeapon().getLoadIterationTimeout());
+                    i.setUnloadingTimeout(i.getWeapon().getUnloadingTimeout());
+                    i.setspawnEntityDamage(i.getWeapon().getSpawnEntityDamage());
+                    i.setspawnEntitySpeed(i.getWeapon().getSpawnEntitySpeed());
+                    i.setspawnEntityGravityVelocity(i.getWeapon().getSpawnEntityGravityVelocity());
+                    i.setspawnEntityExplosionRadius(i.getWeapon().getSpawnEntityExplosionRadius());
                 }).withFirstPersonModelPositioning((model, itemStack) -> {
                     if (model instanceof com.paneedah.mwc.models.Bipod) {
                         GL11.glTranslatef(0.7F, -1.1F, 0.5F);
@@ -17542,6 +17629,14 @@ public class Attachments {
                 .withModel(new com.paneedah.mwc.models.AUGGrip(), "gun.png")
                 .withApply((a, i) -> {
                     i.setRecoil(i.getWeapon().getRecoil() * 0.6f);
+                    i.setReloadingTime(i.getWeapon().getReloadingTime() * 1);
+                    i.setFireRate(i.getWeapon().getFireRate());
+                    i.setLoadIterationTime(i.getWeapon().getLoadIterationTimeout());
+                    i.setUnloadingTimeout(i.getWeapon().getUnloadingTimeout());
+                    i.setspawnEntityDamage(i.getWeapon().getSpawnEntityDamage());
+                    i.setspawnEntitySpeed(i.getWeapon().getSpawnEntitySpeed());
+                    i.setspawnEntityGravityVelocity(i.getWeapon().getSpawnEntityGravityVelocity());
+                    i.setspawnEntityExplosionRadius(i.getWeapon().getSpawnEntityExplosionRadius());
                 }).withFirstPersonModelPositioning((model, itemStack) -> {
                     if (model instanceof com.paneedah.mwc.models.AUGGrip) {
                         GL11.glTranslatef(0.7F, -1.1F, 0.5F);
@@ -17582,6 +17677,14 @@ public class Attachments {
                 .withModel(new com.paneedah.mwc.models.USPMatchCompensator(), "gun.png")
                 .withApply((a, i) -> {
                     i.setRecoil(i.getWeapon().getRecoil() * 0.4f);
+                    i.setReloadingTime(i.getWeapon().getReloadingTime() * 1);
+                    i.setFireRate(i.getWeapon().getFireRate());
+                    i.setLoadIterationTime(i.getWeapon().getLoadIterationTimeout());
+                    i.setUnloadingTimeout(i.getWeapon().getUnloadingTimeout());
+                    i.setspawnEntityDamage(i.getWeapon().getSpawnEntityDamage());
+                    i.setspawnEntitySpeed(i.getWeapon().getSpawnEntitySpeed());
+                    i.setspawnEntityGravityVelocity(i.getWeapon().getSpawnEntityGravityVelocity());
+                    i.setspawnEntityExplosionRadius(i.getWeapon().getSpawnEntityExplosionRadius());
                 }).withFirstPersonModelPositioning((model, itemStack) -> {
                     if (model instanceof com.paneedah.mwc.models.USPMatchCompensator) {
                         GL11.glTranslatef(0.7F, -1.1F, 0.5F);

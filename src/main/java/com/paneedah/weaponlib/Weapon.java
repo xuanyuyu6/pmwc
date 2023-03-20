@@ -72,6 +72,7 @@ AttachmentContainer, Reloadable, Inspectable, Modifiable, Updatable, IModernCraf
         int ammoCapacity = 0;
         float recoil = 1.0F;
 
+
         private boolean hasFlashPedals = false;
         
         private String shootSound;
@@ -104,11 +105,11 @@ AttachmentContainer, Reloadable, Inspectable, Modifiable, Updatable, IModernCraf
         String crosshairZoomed;
         BiFunction<Weapon, EntityLivingBase, ? extends WeaponSpawnEntity> spawnEntityWith;
         BiFunction<PlayerWeaponInstance, EntityLivingBase, ? extends EntityShellCasing> spawnShellWith;
-        private float spawnEntityDamage;
+        float spawnEntityDamage;
         private boolean spawnEntityRocketParticles;
-        private float spawnEntityExplosionRadius;
+        float spawnEntityExplosionRadius;
         private boolean isDestroyingBlocks = true;
-        private float spawnEntityGravityVelocity;
+        float spawnEntityGravityVelocity;
         private float spawnEntityParticleAgeCoefficient = 1f;
         private float spawnEntitySmokeParticleAgeCoefficient = 1f;
         private float spawnEntityExplosionParticleScaleCoefficient = 1.5f;
@@ -130,7 +131,7 @@ AttachmentContainer, Reloadable, Inspectable, Modifiable, Updatable, IModernCraf
         ModelBase shellCasingModel;
         String shellCasingModelTextureName;
 
-        private float spawnEntitySpeed = DEFAULT_SPAWN_ENTITY_SPEED;
+        float spawnEntitySpeed = DEFAULT_SPAWN_ENTITY_SPEED;
         private Class<? extends WeaponSpawnEntity> spawnEntityClass;
         ImpactHandler blockImpactHandler;
         long pumpTimeoutMilliseconds;
@@ -1365,6 +1366,15 @@ AttachmentContainer, Reloadable, Inspectable, Modifiable, Updatable, IModernCraf
         instance.setState(WeaponState.READY);
     
         instance.setRecoil(builder.recoil);
+        instance.setReloadingTime(builder.reloadingTimeout);
+        instance.setFireRate(builder.fireRate);
+        instance.setLoadIterationTime(builder.loadIterationTimeout);
+        instance.setUnloadingTimeout(builder.unloadingTimeout);
+        instance.setspawnEntityDamage(builder.spawnEntityDamage);
+        instance.setspawnEntitySpeed(builder.spawnEntitySpeed);
+        instance.setspawnEntityGravityVelocity(builder.spawnEntityGravityVelocity);
+        instance.setspawnEntityExplosionRadius(builder.spawnEntityExplosionRadius);
+
         instance.setMaxShots(builder.maxShots.get(0));
 
         for(CompatibleAttachment<Weapon> compatibleAttachment: ((Weapon) itemStack.getItem()).getCompatibleAttachments().values()) {
@@ -1530,6 +1540,15 @@ AttachmentContainer, Reloadable, Inspectable, Modifiable, Updatable, IModernCraf
         case GRIP:
             handler = (a, i) -> {
                 i.setRecoil(builder.recoil);
+                i.setReloadingTime(builder.reloadingTimeout);
+                i.setFireRate(builder.fireRate);
+                i.setLoadIterationTime(builder.loadIterationTimeout);
+                i.setUnloadingTimeout(builder.unloadingTimeout);
+                i.setspawnEntityDamage(builder.spawnEntityDamage);
+                i.setspawnEntitySpeed(builder.spawnEntitySpeed);
+                i.setspawnEntityGravityVelocity(builder.spawnEntityGravityVelocity);
+                i.setspawnEntityExplosionRadius(builder.spawnEntityExplosionRadius);
+
             };
             break;
         default:
@@ -1544,6 +1563,18 @@ AttachmentContainer, Reloadable, Inspectable, Modifiable, Updatable, IModernCraf
 
     public float getRecoil() {
         return builder.recoil;
+    }
+    public long getReloadingTime() {
+        return builder.reloadingTimeout;
+    }
+    public float getFireRate() {
+        return builder.fireRate;
+    }
+    public long getLoadIterationTimeout() {
+        return builder.loadIterationTimeout;
+    }
+    public long getUnloadingTimeout() {
+        return builder.unloadingTimeout;
     }
 
     public ModContext getModContext() {
@@ -1605,7 +1636,7 @@ AttachmentContainer, Reloadable, Inspectable, Modifiable, Updatable, IModernCraf
     public float getSpawnEntityGravityVelocity() {
         return builder.spawnEntityGravityVelocity;
     }
-
+    public float getSpawnEntitySpeed() {return builder.spawnEntitySpeed;}
     public float getSpawnEntityDamage() {
         return builder.spawnEntityDamage;
     }
